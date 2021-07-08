@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateTransactions1625782764321 implements MigrationInterface {
+export class CreateTransactions1625783979485 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "transaction",
+        name: "transactions",
         columns: [
           {
             name: "id",
@@ -24,12 +24,8 @@ export class CreateTransactions1625782764321 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "description",
-            type: "varchar",
-          },
-          {
             name: "public",
-            type: "bool",
+            type: "boolean",
             default: true,
           },
           {
@@ -40,7 +36,7 @@ export class CreateTransactions1625782764321 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FKUserFrom",
+            name: "FKFromUser",
             referencedTableName: "users",
             referencedColumnNames: ["id"],
             columnNames: ["from_id"],
@@ -48,7 +44,7 @@ export class CreateTransactions1625782764321 implements MigrationInterface {
             onUpdate: "SET NULL",
           },
           {
-            name: "FKUserTo",
+            name: "FKToUser",
             referencedTableName: "users",
             referencedColumnNames: ["id"],
             columnNames: ["to_id"],
@@ -61,6 +57,6 @@ export class CreateTransactions1625782764321 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("transaction");
+    queryRunner.dropTable("transactions");
   }
 }
