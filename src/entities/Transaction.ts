@@ -7,6 +7,7 @@ import {
   PrimaryColumn,
 } from "typeorm";
 import { User } from "./User";
+import { v4 as uuid } from "uuid";
 
 @Entity("transactions")
 export class Transaction {
@@ -31,8 +32,17 @@ export class Transaction {
   to_user: User;
 
   @Column()
+  description: string;
+
+  @Column()
   public: boolean;
 
   @CreateDateColumn()
   created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }
