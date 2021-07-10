@@ -15,4 +15,8 @@ router.post("/user", userController.store);
 router.post("/login", authenticateUserController.store);
 router.post("/transaction", EnsureAuthenticated, transactionController.store);
 
+// Get
+router.get("/user", EnsureAuthenticated, userController.show);
+router.get("/user/:id", userController.show);
+
 export { router };

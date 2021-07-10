@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CreateUserService } from "../services/CreateUserService";
+import { FindUserService } from "../services/FindUserService";
 
 class UserController {
   async store(req: Request, res: Response) {
@@ -12,6 +13,17 @@ class UserController {
       email,
       password,
     });
+
+    return res.json(user);
+  }
+
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+    const { user_id } = req;
+
+    const findUserSerivce = new FindUserService();
+
+    const user = await findUserSerivce.execute(!id ? user_id : id, !id);
 
     return res.json(user);
   }

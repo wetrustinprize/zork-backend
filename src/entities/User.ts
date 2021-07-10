@@ -1,3 +1,4 @@
+import { Exclude, Expose } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -16,12 +17,26 @@ class User {
   @Column()
   fullname: string;
 
+  @Expose({ name: "first_name" })
+  firstName(): string {
+    const names = this.fullname.split(" ");
+    return names.length > 1 ? names[0] : this.fullname;
+  }
+
+  @Expose({ name: "last_name" })
+  lastName(): string {
+    const names = this.fullname.split(" ");
+    return names.length > 1 ? names.slice(1).join(" ") : "";
+  }
+
+  @Exclude()
   @Column()
   password: string;
 
   @Column()
   email: string;
 
+  @Expose({ groups: ["self"] })
   @Column()
   zorks: number;
 
