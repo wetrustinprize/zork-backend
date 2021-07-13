@@ -25,9 +25,13 @@ class CreateTransactionService {
 
     // Check if "to" User exists
     const toUser = await usersRepostiories.findOne({ email });
-
     if (!toUser) {
       throw new Error("Invalid user");
+    }
+
+    // Check if "to" and "from" aren't the same person
+    if (toUser.id == from) {
+      throw new Error("You can't transfer to yourself.");
     }
 
     // Check if "from" has enough Zorks
