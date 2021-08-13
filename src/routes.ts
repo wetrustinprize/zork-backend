@@ -12,15 +12,18 @@ const authenticateUserController = new AuthenticateUserController();
 const transactionController = new TransactionController();
 const requestController = new RequestController();
 
-// Post
-router.post("/user", userController.store);
-router.post("/login", authenticateUserController.store);
-router.post("/transaction", EnsureAuthenticated, transactionController.store);
-router.post("/request", EnsureAuthenticated, requestController.store);
-
-// Get
+// USER
 router.get("/user", EnsureAuthenticated, userController.show);
 router.get("/user/:id", EnsureAuthenticated, userController.show);
+
+router.post("/user", userController.store);
+router.post("/login", authenticateUserController.store);
+
+// TRANSACTION
+router.post("/transaction", EnsureAuthenticated, transactionController.store);
 router.get("/transaction/:id", EnsureAuthenticated, transactionController.show);
+
+// REQUEST
+router.post("/request", EnsureAuthenticated, requestController.store);
 
 export { router };
