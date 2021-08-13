@@ -29,7 +29,7 @@ class Request {
   @Column()
   request_canceled: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   request_result: string;
 
   @JoinColumn({ name: "request_result" })

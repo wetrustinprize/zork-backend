@@ -25,11 +25,8 @@ class CreateRequestService {
       throw new Error("You can't request to yourself");
     }
 
-    // Check if "from" has enough Zorks
+    // Get "from" User
     const fromUser = await usersRepositories.findOne(from);
-    if (fromUser.zorks < value) {
-      throw new Error("You don't have enough Zorks");
-    }
 
     // Create request
     const request = requestRepositories.create({
@@ -38,7 +35,7 @@ class CreateRequestService {
       zorks: value,
       description,
       request_canceled: false,
-      request_result: "",
+      request_result: null,
       last_zorks: value,
     });
 
