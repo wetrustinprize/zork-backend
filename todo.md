@@ -12,26 +12,19 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 ## Request
 
-- [ ] GET: Get all authenticated user received requests
-
-  - `/request`
+- [x] GET: Get all authenticated user received requests
 
 - [ ] GET: Get all authenticated user sent request to another user
 
-  - `/request/:email`
+- [x] GET: Get specific request
+
+- [x] POST: Create a request
 
 - [ ] POST: Accept a request
 
-  - [ ] Accept a request
-  - [ ] Create new transaction for that request
-  - [ ] Close the request
-
 - [ ] POST: Deny a request
 
-  - [ ] Mark a request as canceled
-
 - [ ] POST: Redo the request
-  - [ ] Change the value from the request
 
 ---
 
@@ -41,7 +34,8 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 - [x] GET: authenticated user
 - [x] GET: specific user by id
-- [ ] GET: specific user by e-mail
+- [x] GET: specific user by e-mail
+- [x] GET: List all users
 - [x] POST: New user
 
 ## Authentication
@@ -52,3 +46,4 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 - [x] POST: New transaction
 - [x] GET: Transaction by id
+- [ ] GET: Index Transactions
