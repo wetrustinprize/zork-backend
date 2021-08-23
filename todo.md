@@ -12,17 +12,15 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 ## Request
 
-- [x] GET: Get all authenticated user received requests
-
-- [ ] GET: Get all authenticated user sent request to another user
+- [x] GET: Get all requests related to the authenticated user
 
 - [x] GET: Get specific request
 
 - [x] POST: Create a request
 
-- [ ] POST: Accept a request
+- [x] POST: Accept a request
 
-- [ ] POST: Deny a request
+- [x] POST: Refuse a request
 
 - [ ] POST: Redo the request
 
