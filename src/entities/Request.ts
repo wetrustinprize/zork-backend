@@ -10,7 +10,6 @@ import {
 import { Transaction } from "./Transaction";
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
-import { Expose } from "class-transformer";
 
 @Entity("requests")
 class Request {
@@ -35,11 +34,6 @@ class Request {
   @JoinColumn({ name: "request_result" })
   @ManyToOne(() => Transaction)
   request_transaction: Transaction;
-
-  @Expose({ name: "completed" })
-  completed(): boolean {
-    return this.request_result !== null;
-  }
 
   @Column()
   from_id: string;
