@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AcceptRequestService } from "../services/Request/AcceptRequestService";
 import { CreateRequestService } from "../services/Request/CreateRequestService";
+import { RefuseRequestService } from "../services/Request/RefuseRequestService";
 import { FindRequestService } from "../services/Request/FindRequestService";
 import { IndexRequestService } from "../services/Request/IndexRequestService";
 
@@ -42,18 +43,31 @@ class RequestController {
     return res.json(request);
   }
 
-  async accept(req: Request, res: Response) {
+  async method(req: Request, res: Response) {
     const { id } = req.params;
     const { user_id } = req;
+    const { method, value } = req.body;
 
-    const acceptRequestService = new AcceptRequestService();
+    // Accept request
+    if (method == "accept") {
+      const acceptRequestService = new AcceptRequestService();
+      const request = await acceptRequestService.execute({
+        self: user_id,
+        id,
+      });
 
-    const request = await acceptRequestService.execute({
-      self: user_id,
-      id,
-    });
+      return res.json(request);
+    }
 
-    return res.json(request);
+    // Refuse request
+    if (method == "refuse") {
+      const refuseRequestService = new RefuseRequestService();
+      const request = await refuseRequestService.execute({ self: user_id, id });
+
+      return res.json(request);
+    }
+
+    throw new Error("Uknown method");
   }
 }
 
