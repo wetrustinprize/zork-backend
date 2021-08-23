@@ -32,6 +32,6 @@ router.get("/requests", EnsureAuthenticated, requestController.index);
 router.get("/request/:id", EnsureAuthenticated, requestController.show);
 
 router.post("/request", EnsureAuthenticated, requestController.store);
-router.post("/request/:id", EnsureAuthenticated, requestController.accept);
+router.post("/request/:id", EnsureAuthenticated, requestController.method);
 
 export { router };
