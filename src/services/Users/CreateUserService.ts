@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import { UsersRepositories } from "../../repositories/UsersRepositories";
 import { validate as email_validate } from "email-validator";
 import { hash } from "bcryptjs";
+import { classToPlain } from "class-transformer";
 
 interface IUserRequest {
   fullname: string;
@@ -46,7 +47,7 @@ class CreateUserService {
 
     await userRepo.save(user);
 
-    return user;
+    return classToPlain(user);
   }
 }
 
