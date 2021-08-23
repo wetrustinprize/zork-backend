@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CreateTransactionService } from "../services/Transaction/CreateTransactionService";
 import { FindTransactionService } from "../services/Transaction/FindTransactionService";
+import { IndexTransactionService } from "../services/Transaction/IndexTransactionService";
 
 class TransactionController {
   async store(req: Request, res: Response) {
@@ -30,6 +31,14 @@ class TransactionController {
     });
 
     return res.json(transaction);
+  }
+
+  async index(req: Request, res: Response) {
+    const indexTransactionService = new IndexTransactionService();
+
+    const transactions = await indexTransactionService.execute();
+
+    return res.json(transactions);
   }
 }
 

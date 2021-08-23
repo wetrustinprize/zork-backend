@@ -25,6 +25,7 @@ router.post("/login", authenticateUserController.store); // Login user
 // TRANSACTION
 router.post("/transaction", EnsureAuthenticated, transactionController.store);
 
+router.get("/transaction", EnsureAuthenticated, transactionController.index);
 router.get("/transaction/:id", EnsureAuthenticated, transactionController.show);
 
 // REQUEST
