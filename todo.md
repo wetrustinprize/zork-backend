@@ -22,7 +22,7 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 - [x] POST: Refuse a request
 
-- [ ] POST: Redo the request
+- [x] POST: Redo the request
 
 ---
 
@@ -44,4 +44,4 @@ Simple todo list for the Zork backend, so I can keep track of what I've made and
 
 - [x] POST: New transaction
 - [x] GET: Transaction by id
-- [ ] GET: Index Transactions
+- [x] GET: Index Transactions
