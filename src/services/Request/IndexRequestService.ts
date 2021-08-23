@@ -17,6 +17,7 @@ class IndexRequestService {
         },
         { to_id: self },
       ],
+      relations: ["to_user", "from_user"],
     });
 
     return classToPlain(requests);
