@@ -9,15 +9,17 @@ interface IRequestRequest {
 }
 
 class AcceptRequestService {
-  async execute({ id, self: from }: IRequestRequest) {
+  async execute({ id, self }: IRequestRequest) {
     const usersRepositories = getCustomRepository(UsersRepositories);
     const requestsRepositories = getCustomRepository(RequestsRepositories);
 
-    const fromUser = await usersRepositories.findOne({ id: from });
+    const selfUser = await usersRepositories.findOne({ id: self });
     const request = await requestsRepositories.findOne(id);
 
+    console.log(request);
+
     // Check if request is completed or canceled
-    if (request.completed) {
+    if (request.request_result !== null) {
       throw new Error("This request is completed");
     }
 
@@ -26,12 +28,12 @@ class AcceptRequestService {
     }
 
     // Check if to is not the same as from
-    if (request.to_id !== fromUser.id) {
+    if (request.to_id !== selfUser.id) {
       throw new Error("This request isn't for you");
     }
 
     // Check if user has sufficient zorks
-    if (fromUser.zorks < request.zorks) {
+    if (selfUser.zorks < request.zorks) {
       throw new Error("You don't have enough Zorks");
     }
 
@@ -42,13 +44,15 @@ class AcceptRequestService {
     const transaction = await createTransactionService.execute({
       email: toUser.email,
       value: request.zorks,
-      from: fromUser.id,
+      from: selfUser.id,
       description: request.description,
       is_public: true,
     });
 
     // Save request
     request.request_result = transaction.id;
+
+    requestsRepositories.save(request);
 
     return request;
   }
