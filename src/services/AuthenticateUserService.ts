@@ -2,6 +2,7 @@ import { compare } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 import { UsersRepositories } from "../repositories/UsersRepositories";
 import { sign } from "jsonwebtoken";
+import { BadRequestError } from "../utilities/HTTPErrors";
 
 interface IAuthenticateRequest {
   email: string;
@@ -23,7 +24,7 @@ class AuthenticateUserService {
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error("Email/Password incorrect");
+      throw new BadRequestError("Invalid e-mail or password.");
     }
 
     // Gerar token

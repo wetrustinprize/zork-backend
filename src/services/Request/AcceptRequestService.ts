@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import { UsersRepositories } from "../../repositories/UsersRepositories";
 import { RequestsRepositories } from "../../repositories/RequestsRepositories";
 import { CreateTransactionService } from "../Transaction/CreateTransactionService";
+import { BadRequestError, ForbiddenError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   id: string;
@@ -18,23 +19,21 @@ class AcceptRequestService {
 
     console.log(request);
 
-    // Check if request is completed or canceled
+    if (request.to_id !== self) {
+      throw new ForbiddenError("This request isn't for you");
+    }
+
     if (request.request_result !== null) {
-      throw new Error("This request is completed");
+      throw new BadRequestError("This request has already been completed");
     }
 
     if (request.request_canceled) {
-      throw new Error("This request is canceled");
-    }
-
-    // Check if to is not the same as from
-    if (request.to_id !== selfUser.id) {
-      throw new Error("This request isn't for you");
+      throw new BadRequestError("This request has already been canceled");
     }
 
     // Check if user has sufficient zorks
     if (selfUser.zorks < request.zorks) {
-      throw new Error("You don't have enough Zorks");
+      throw new BadRequestError("You don't have enough Zorks");
     }
 
     // Make transaction

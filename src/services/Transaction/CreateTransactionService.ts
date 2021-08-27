@@ -2,6 +2,7 @@ import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { TransactionsRepositories } from "../../repositories/TransactionRepositories";
 import { UsersRepositories } from "../../repositories/UsersRepositories";
+import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface ITransactionRequest {
   email: string;
@@ -27,18 +28,18 @@ class CreateTransactionService {
     // Check if "to" User exists
     const toUser = await usersRepostiories.findOne({ email });
     if (!toUser) {
-      throw new Error("Invalid user");
+      throw new BadRequestError("There is no user with this email");
     }
 
     // Check if "to" and "from" aren't the same person
     if (toUser.id == from) {
-      throw new Error("You can't transfer to yourself.");
+      throw new BadRequestError("You can't transfer to yourself");
     }
 
     // Check if "from" has enough Zorks
     const fromUser = await usersRepostiories.findOne(from);
     if (fromUser.zorks < value) {
-      throw new Error("You don't have enough Zorks");
+      throw new BadRequestError("You don't have enough Zorks");
     }
 
     // Create transaction

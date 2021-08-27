@@ -1,6 +1,7 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { RequestsRepositories } from "../../repositories/RequestsRepositories";
+import { BadRequestError, ForbiddenError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   id: string;
@@ -13,11 +14,11 @@ class FindRequestService {
 
     const request = await requestRepositories.findOne(id);
     if (!request) {
-      throw new Error("Invalid ID");
+      throw new BadRequestError("Invalid request ID");
     }
 
     if (request.from_id !== self && request.to_id !== self) {
-      throw new Error("You can't see this request");
+      throw new ForbiddenError("This request isn't yours or isn't for you");
     }
 
     return classToPlain(request);

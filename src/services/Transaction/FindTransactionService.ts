@@ -1,6 +1,7 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { TransactionsRepositories } from "../../repositories/TransactionRepositories";
+import { BadRequestError, ForbiddenError } from "../../utilities/HTTPErrors";
 
 interface ITransactionRequest {
   transaction_id: string;
@@ -19,7 +20,7 @@ class FindTransactionService {
     });
     // verify if transaction exists
     if (!transaction) {
-      throw new Error("Invalid transaction ID");
+      throw new BadRequestError("Invalid transaction ID");
     }
 
     // verify if transaction is public and the user isn't neither the receiver or sender
@@ -28,7 +29,7 @@ class FindTransactionService {
       transaction.from_id != user_id &&
       transaction.to_id
     ) {
-      throw new Error("Not permited");
+      throw new ForbiddenError("You can't see this transaction");
     }
 
     // return transaction

@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { RequestsRepositories } from "../../repositories/RequestsRepositories";
+import { BadRequestError, ForbiddenError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   id: string;
@@ -13,15 +14,15 @@ class RefuseRequestService {
     const request = await requestRepositories.findOne(id);
 
     if (request.from_id !== self && request.to_id !== self) {
-      throw new Error("This request isn't yours or isn't for you.");
+      throw new ForbiddenError("This request isn't yours or isn't for you");
     }
 
     if (request.request_result !== null) {
-      throw new Error("This request has already been completed.");
+      throw new BadRequestError("This request has already been completed");
     }
 
     if (request.request_canceled) {
-      throw new Error("This request has already been canceled.");
+      throw new BadRequestError("This request has already been canceled");
     }
 
     // Save request

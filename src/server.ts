@@ -5,6 +5,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { router } from "./routes";
 
 import "./database";
+import { HTTPError } from "./utilities/HTTPErrors";
 
 const app = express();
 
@@ -14,10 +15,8 @@ app.use(router);
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
-    if (err instanceof Error) {
-      return response.status(400).json({
-        error: err.message,
-      });
+    if (err instanceof HTTPError) {
+      return response.status(err.code).json({ error: err.message });
     }
 
     return response.status(500).json({

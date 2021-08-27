@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { classToPlain } from "class-transformer";
 import { UsersRepositories } from "../../repositories/UsersRepositories";
+import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface IUserRequest {
   id: string;
@@ -17,7 +18,7 @@ class FindUserByIDService {
 
     const user = await usersRepositories.findOne(id);
     if (!user) {
-      throw new Error("Invalid ID");
+      throw new BadRequestError("Invalid ID");
     }
 
     return classToPlain(user, { groups: [self ? "self" : ""] });

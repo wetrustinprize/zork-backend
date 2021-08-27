@@ -3,6 +3,7 @@ import { UsersRepositories } from "../../repositories/UsersRepositories";
 import { validate as email_validate } from "email-validator";
 import { hash } from "bcryptjs";
 import { classToPlain } from "class-transformer";
+import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface IUserRequest {
   fullname: string;
@@ -16,24 +17,24 @@ class CreateUserService {
 
     // Check if e-mail is valid
     if (!email_validate(email)) {
-      throw new Error("Email is not valid");
+      throw new BadRequestError("Invalid email");
     }
 
     // Check if name isn't empty
     if (!fullname) {
-      throw new Error("Name is not valid");
+      throw new BadRequestError("Fullname can't be empty");
     }
 
     // Check if password is valid
     if (!password) {
-      throw new Error("Password is not valid");
+      throw new BadRequestError("Password can't be empty");
     }
 
     // Check if user already exists
     const userAlreadyExists = await userRepo.findOne({ email });
 
     if (userAlreadyExists) {
-      throw new Error("User already exists");
+      throw new BadRequestError("There is already a user with this email");
     }
 
     // Creates new user

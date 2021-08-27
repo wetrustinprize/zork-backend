@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { RequestsRepositories } from "../../repositories/RequestsRepositories";
+import { BadRequestError, ForbiddenError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   id: string;
@@ -18,7 +19,15 @@ class RedoRequestService {
     const request = await requestRepositories.findOne(id);
 
     if (request.to_id !== self) {
-      throw new Error("This request isn't for you");
+      throw new ForbiddenError("This request isn't for you");
+    }
+
+    if (request.request_result !== null) {
+      throw new BadRequestError("This request has already been completed");
+    }
+
+    if (request.request_canceled) {
+      throw new BadRequestError("This request has already been canceled");
     }
 
     // Set new value

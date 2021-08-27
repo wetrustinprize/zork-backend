@@ -2,6 +2,7 @@ import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { RequestsRepositories } from "../../repositories/RequestsRepositories";
 import { UsersRepositories } from "../../repositories/UsersRepositories";
+import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   self: string;
@@ -23,12 +24,12 @@ class CreateRequestService {
     // Check if "to" User exists
     const toUser = await usersRepositories.findOne({ email });
     if (!toUser) {
-      throw new Error("Invalid user");
+      throw new BadRequestError("Invalid user");
     }
 
     // Check if "from" and "to" aren't the same person
     if (toUser.id == from) {
-      throw new Error("You can't request to yourself");
+      throw new BadRequestError("You can't request to yourself");
     }
 
     // Get "from" User

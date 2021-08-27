@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
+import { ForbiddenError, UnauthorizedError } from "../utilities/HTTPErrors";
 
 interface IPayLoad {
   sub: string;
@@ -14,7 +15,7 @@ export function EnsureAuthenticated(
 
   // Verificar se tem autenticação
   if (!authToken) {
-    return response.status(401).end();
+    throw new UnauthorizedError("Require a authentication token.");
   }
 
   const [, token] = authToken.split(" ");
@@ -26,6 +27,6 @@ export function EnsureAuthenticated(
 
     return next();
   } catch (err) {
-    return response.status(401).end();
+    throw new ForbiddenError("Not valid authentication token.");
   }
 }
