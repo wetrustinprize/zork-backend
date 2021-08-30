@@ -4,7 +4,6 @@ import { CreateRequestService } from "../services/Request/CreateRequestService";
 import { RefuseRequestService } from "../services/Request/RefuseRequestService";
 import { FindRequestService } from "../services/Request/FindRequestService";
 import { IndexRequestService } from "../services/Request/IndexRequestService";
-import { RedoRequestService } from "../services/Request/RedoRequestService";
 
 class RequestController {
   async store(req: Request, res: Response) {
@@ -68,19 +67,7 @@ class RequestController {
       return res.json(request);
     }
 
-    // Redo request
-    if (method == "redo") {
-      const redoRequestService = new RedoRequestService();
-      const request = await redoRequestService.execute({
-        self: user_id,
-        id,
-        value,
-      });
-
-      return res.json(request);
-    }
-
-    throw new Error("Uknown method");
+    throw new Error("Unknown method");
   }
 }
 
