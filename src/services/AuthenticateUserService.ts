@@ -39,7 +39,7 @@ class AuthenticateUserService {
       }
     );
 
-    return { acces_token: token };
+    return { access_token: token };
   }
 }
 
