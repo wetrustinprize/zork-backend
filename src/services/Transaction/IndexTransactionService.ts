@@ -10,6 +10,7 @@ class IndexTransactionService {
 
     const transactions = await transactionRepositories.find({
       relations: ["from_user", "to_user"],
+      order: { created_at: "DESC" },
     });
 
     return classToPlain(transactions);
