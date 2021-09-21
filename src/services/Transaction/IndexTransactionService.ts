@@ -1,3 +1,4 @@
+import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { TransactionsRepositories } from "../../repositories/TransactionRepositories";
 
@@ -11,7 +12,7 @@ class IndexTransactionService {
       relations: ["from_user", "to_user"],
     });
 
-    return transactions;
+    return classToPlain(transactions);
   }
 }
 
