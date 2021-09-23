@@ -1,10 +1,8 @@
-# Zork Backend
+<h1 align="center">Ƶork Frontend</h1>
+<h4 align="center">made with: Express</h4>
 
-The backend server for Zork services.
-
-- [Zork Backend](#zork-backend)
-  - [What is Zork?](#what-is-zork)
-  - [How to run](#how-to-run)
+- [What is Zork?](#what-is-zork)
+- [How to run](#how-to-run)
 - [API](#api)
   - [User](#user)
     - [Model](#model)
@@ -16,13 +14,13 @@ The backend server for Zork services.
   - [Request](#request)
     - [Model](#model-2)
 
-## What is Zork?
+# What is Zork?
 
 This is a simple project I made to learn how to develop backend using Node.js + Typescript.
 
 Zork is a simple service to trade points with your friends, or ask points from them.
 
-## How to run
+# How to run
 
 First of all, you need to install packages using your favorite package manager, in my case: yarn.
 
