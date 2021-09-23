@@ -13,6 +13,7 @@
     - [Model](#model-1)
   - [Request](#request)
     - [Model](#model-2)
+- [Credits](#credits)
 
 # What is Zork?
 
@@ -147,3 +148,10 @@ GET /users
 | updated_at          | date        | When this request was updated                                 |
 
 TODO
+
+# Credits
+
+| who                                               | what                   |
+| ------------------------------------------------- | ---------------------- |
+| Peterson Adami Candido                            | Coding                 |
+| [Gustavo Fernandes](https://github.com/nGustavin) | Helping _(thanks bro)_ |
