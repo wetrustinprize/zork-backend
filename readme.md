@@ -3,19 +3,23 @@
 
 - [What is Zork?](#what-is-zork)
 - [How to run](#how-to-run)
-- [API](#api)
-  - [User](#user)
-    - [Model](#model)
-    - [Create a new user](#create-a-new-user)
-    - [Authenticate](#authenticate)
-    - [Show all users](#show-all-users)
-  - [Transaction](#transaction)
-    - [Model](#model-1)
-    - [Show all transactions](#show-all-transactions)
-    - [Show specific transaction by ID](#show-specific-transaction-by-id)
-    - [Make transaction](#make-transaction)
-  - [Request](#request)
-    - [Model](#model-2)
+- [User](#user)
+  - [Model](#model)
+  - [Create a new user](#create-a-new-user)
+  - [Authenticate](#authenticate)
+  - [Show all users](#show-all-users)
+- [Transaction](#transaction)
+  - [Model](#model-1)
+  - [Show all transactions](#show-all-transactions)
+  - [Show specific transaction by ID](#show-specific-transaction-by-id)
+  - [Make transaction](#make-transaction)
+- [Request](#request)
+  - [Model](#model-2)
+  - [List authenticated user requests](#list-authenticated-user-requests)
+  - [Show specific request by ID](#show-specific-request-by-id)
+  - [Accept request](#accept-request)
+  - [Refuse request](#refuse-request)
+  - [Make request](#make-request)
 - [Credits](#credits)
 
 # What is Zork?
@@ -38,11 +42,9 @@ Then, you can start the server by typing: (_the server will listen on port 3000_
 yarn dev
 ```
 
-# API
+# User
 
-## User
-
-### Model
+## Model
 
 | Key        | Value  | Description                                            |
 | ---------- | ------ | ------------------------------------------------------ |
@@ -56,7 +58,7 @@ yarn dev
 | updated_at | date   | Last time this user was updated                        |
 | zorks      | number | Only shows if is group is "self"                       |
 
-### Create a new user
+## Create a new user
 
 Creates a new user in the database.
 
@@ -92,7 +94,7 @@ The user created in json format.
 }
 ```
 
-### Authenticate
+## Authenticate
 
 Authenticated the user and gets a new access token.
 
@@ -121,7 +123,7 @@ The access token in json format.
 }
 ```
 
-### Show all users
+## Show all users
 
 Show all the users that are registered in the database.
 
@@ -137,9 +139,11 @@ GET /users
 
 A array with all the registered users in json format.
 
-## Transaction
+---
 
-### Model
+# Transaction
+
+## Model
 
 | Key         | Value   | Description                                      |
 | ----------- | ------- | ------------------------------------------------ |
@@ -153,7 +157,7 @@ A array with all the registered users in json format.
 | public      | boolean | If true, will show to everyone when index or get |
 | created_at  | date    | When this transaction was created                |
 
-### Show all transactions
+## Show all transactions
 
 Show all the public transactions made.
 
@@ -169,7 +173,7 @@ GET /transactions
 
 A array with all the transactions in json format.
 
-### Show specific transaction by ID
+## Show specific transaction by ID
 
 Show transactions with the specified ID.
 
@@ -216,7 +220,7 @@ The transaction object.
   }
 ```
 
-### Make transaction
+## Make transaction
 
 Make a transaction between the authenticated user and the specified user.
 
@@ -271,9 +275,11 @@ The transaction object.
   }
 ```
 
-## Request
+---
 
-### Model
+# Request
+
+## Model
 
 | Key                 | Value       | Description                                                   |
 | ------------------- | ----------- | ------------------------------------------------------------- |
@@ -290,7 +296,17 @@ The transaction object.
 | created_at          | date        | The date of when this request was created                     |
 | updated_at          | date        | When this request was updated                                 |
 
-TODO
+## List authenticated user requests
+
+## Show specific request by ID
+
+## Accept request
+
+## Refuse request
+
+## Make request
+
+---
 
 # Credits
 
