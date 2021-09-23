@@ -1,4 +1,4 @@
-<h1 align="center">Ƶork Frontend</h1>
+<h1 align="center">Ƶork Backend</h1>
 <h4 align="center">made with: Express</h4>
 
 - [What is Zork?](#what-is-zork)
@@ -11,6 +11,9 @@
     - [Show all users](#show-all-users)
   - [Transaction](#transaction)
     - [Model](#model-1)
+    - [Show all transactions](#show-all-transactions)
+    - [Show specific transaction by ID](#show-specific-transaction-by-id)
+    - [Make transaction](#make-transaction)
   - [Request](#request)
     - [Model](#model-2)
 - [Credits](#credits)
@@ -57,13 +60,13 @@ yarn dev
 
 Creates a new user in the database.
 
-Endpoint
+**Endpoint**
 
 ```bash
 POST /user
 ```
 
-Body
+**Body**
 
 ```json
 {
@@ -73,17 +76,33 @@ Body
 }
 ```
 
+**Returns**
+
+The user created in json format.
+
+```json
+{
+  "id": "816cde7e-d9c7-4efd-b456-36c456a67b24",
+  "fullname": "Hello world",
+  "email": "hello@example.com",
+  "created_at": "2021-09-23T19:06:20.000Z",
+  "updated_at": "2021-09-23T19:06:20.000Z",
+  "first_name": "Hello",
+  "last_name": "world"
+}
+```
+
 ### Authenticate
 
 Authenticated the user and gets a new access token.
 
-Endpoint
+**Endpoint**
 
 ```bash
 POST /login
 ```
 
-Body
+**Body**
 
 ```json
 {
@@ -92,7 +111,9 @@ Body
 }
 ```
 
-Returns
+**Returns**
+
+The access token in json format.
 
 ```json
 {
@@ -106,11 +127,15 @@ Show all the users that are registered in the database.
 
 - **Requires authentication**
 
-Endpoint
+**Endpoint**
 
 ```bash
 GET /users
 ```
+
+**Returns**
+
+A array with all the registered users in json format.
 
 ## Transaction
 
@@ -127,6 +152,124 @@ GET /users
 | description | string  | The transactions description                     |
 | public      | boolean | If true, will show to everyone when index or get |
 | created_at  | date    | When this transaction was created                |
+
+### Show all transactions
+
+Show all the public transactions made.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /transactions
+```
+
+**Returns**
+
+A array with all the transactions in json format.
+
+### Show specific transaction by ID
+
+Show transactions with the specified ID.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /transactions/:id
+```
+
+_replace :id with the uuid of the transaction_
+
+**Returns**
+
+The transaction object.
+
+```json
+{
+  "id": "6355f6e2-7c55-4696-9262-a89aa945a6e8",
+  "zorks": 10,
+  "from_id": "795ae92a-38a0-499a-86c9-11016657f6d2",
+  "to_id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
+  "description": "The transaction description."
+  "public": true,
+  "created_at": "2021-07-09T23:19:14.000Z",
+  "from_user": {
+    "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
+    "fullname": "Zork Sender",
+    "email": "example1@zork.com",
+    "created_at": "2021-07-09T22:27:01.000Z",
+    "updated_at": "2021-08-23T14:21:18.000Z",
+    "first_name": "Zork",
+    "last_name": "Sender"
+  },
+  "to_user": {
+    "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
+    "fullname": "Zork Receiver",
+    "email": "example2@zork.com",
+    "created_at": "2021-07-09T22:27:18.000Z",
+    "updated_at": "2021-07-09T23:19:14.000Z",
+    "first_name": "Zork",
+    "last_name": "Receiver"
+  }
+```
+
+### Make transaction
+
+Make a transaction between the authenticated user and the specified user.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+POST /transactions
+```
+
+**Body**
+
+```bash
+{
+  "email": "example2@zork.com",
+  "value": 10,
+  "description": "The transaction description."
+}
+```
+
+**Returns**
+
+The transaction object.
+
+```json
+{
+  "id": "6355f6e2-7c55-4696-9262-a89aa945a6e8",
+  "zorks": 10,
+  "from_id": "795ae92a-38a0-499a-86c9-11016657f6d2",
+  "to_id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
+  "description": "The transaction description."
+  "public": true,
+  "created_at": "2021-07-09T23:19:14.000Z",
+  "from_user": {
+    "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
+    "fullname": "Zork Sender",
+    "email": "example1@zork.com",
+    "created_at": "2021-07-09T22:27:01.000Z",
+    "updated_at": "2021-08-23T14:21:18.000Z",
+    "first_name": "Zork",
+    "last_name": "Sender"
+  },
+  "to_user": {
+    "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
+    "fullname": "Zork Receiver",
+    "email": "example2@zork.com",
+    "created_at": "2021-07-09T22:27:18.000Z",
+    "updated_at": "2021-07-09T23:19:14.000Z",
+    "first_name": "Zork",
+    "last_name": "Receiver"
+  }
+```
 
 ## Request
 
