@@ -4,17 +4,14 @@
 - [What is Zork?](#what-is-zork)
 - [How to run](#how-to-run)
 - [User](#user)
-  - [Model](#model)
   - [Create a new user](#create-a-new-user)
   - [Authenticate](#authenticate)
   - [Show all users](#show-all-users)
 - [Transaction](#transaction)
-  - [Model](#model-1)
   - [Show all transactions](#show-all-transactions)
   - [Show specific transaction by ID](#show-specific-transaction-by-id)
   - [Make transaction](#make-transaction)
 - [Request](#request)
-  - [Model](#model-2)
   - [List authenticated user requests](#list-authenticated-user-requests)
   - [Show specific request by ID](#show-specific-request-by-id)
   - [Accept request](#accept-request)
@@ -43,8 +40,6 @@ yarn dev
 ```
 
 # User
-
-## Model
 
 | Key        | Value  | Description                                            |
 | ---------- | ------ | ------------------------------------------------------ |
@@ -142,8 +137,6 @@ A array with all the registered users in json format.
 ---
 
 # Transaction
-
-## Model
 
 | Key         | Value   | Description                                      |
 | ----------- | ------- | ------------------------------------------------ |
@@ -278,8 +271,6 @@ The transaction object.
 ---
 
 # Request
-
-## Model
 
 | Key                 | Value       | Description                                                   |
 | ------------------- | ----------- | ------------------------------------------------------------- |
