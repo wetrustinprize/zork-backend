@@ -72,8 +72,8 @@ POST /user
 
 ```json
 {
-  "fullname": "Hello world",
-  "email": "hello@example.com",
+  "fullname": "John Doe",
+  "email": "john@doe.com",
   "password": "123"
 }
 ```
@@ -85,12 +85,12 @@ The user created in json format.
 ```json
 {
   "id": "816cde7e-d9c7-4efd-b456-36c456a67b24",
-  "fullname": "Hello world",
-  "email": "hello@example.com",
+  "fullname": "John Doe",
+  "email": "john@doe.com",
   "created_at": "2021-09-23T19:06:20.000Z",
   "updated_at": "2021-09-23T19:06:20.000Z",
-  "first_name": "Hello",
-  "last_name": "world"
+  "first_name": "John",
+  "last_name": "Doe"
 }
 ```
 
@@ -108,7 +108,7 @@ POST /login
 
 ```json
 {
-  "email": "hello@example.com",
+  "email": "john@doe.com",
   "password": "123"
 }
 ```
@@ -203,7 +203,7 @@ The transaction object.
   "from_user": {
     "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
     "fullname": "Zork Sender",
-    "email": "example1@zork.com",
+    "email": "johndoe@zork.com",
     "created_at": "2021-07-09T22:27:01.000Z",
     "updated_at": "2021-08-23T14:21:18.000Z",
     "first_name": "Zork",
@@ -212,7 +212,7 @@ The transaction object.
   "to_user": {
     "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
     "fullname": "Zork Receiver",
-    "email": "example2@zork.com",
+    "email": "johndoe@zork.com",
     "created_at": "2021-07-09T22:27:18.000Z",
     "updated_at": "2021-07-09T23:19:14.000Z",
     "first_name": "Zork",
@@ -236,7 +236,7 @@ POST /transactions
 
 ```bash
 {
-  "email": "example2@zork.com",
+  "email": "johndoe@zork.com",
   "value": 10,
   "description": "The transaction description."
 }
@@ -258,7 +258,7 @@ The transaction object.
   "from_user": {
     "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
     "fullname": "Zork Sender",
-    "email": "example1@zork.com",
+    "email": "johndoe@zork.com",
     "created_at": "2021-07-09T22:27:01.000Z",
     "updated_at": "2021-08-23T14:21:18.000Z",
     "first_name": "Zork",
@@ -267,7 +267,7 @@ The transaction object.
   "to_user": {
     "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
     "fullname": "Zork Receiver",
-    "email": "example2@zork.com",
+    "email": "johndoe@zork.com",
     "created_at": "2021-07-09T22:27:18.000Z",
     "updated_at": "2021-07-09T23:19:14.000Z",
     "first_name": "Zork",
