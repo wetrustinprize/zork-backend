@@ -9,6 +9,8 @@
   - [Show all users](#show-all-users)
 - [Transaction](#transaction)
   - [Show all transactions](#show-all-transactions)
+  - [Shows transactions with a specific User](#shows-transactions-with-a-specific-user)
+  - [Shows transactions related to authenticated User](#shows-transactions-related-to-authenticated-user)
   - [Show specific transaction by ID](#show-specific-transaction-by-id)
   - [Make transaction](#make-transaction)
 - [Request](#request)
@@ -165,6 +167,10 @@ GET /transactions
 **Returns**
 
 A array with all the transactions in json format.
+
+## Shows transactions with a specific User
+
+## Shows transactions related to authenticated User
 
 ## Show specific transaction by ID
 
