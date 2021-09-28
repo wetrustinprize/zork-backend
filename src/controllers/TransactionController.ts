@@ -46,7 +46,7 @@ class TransactionController {
 
       return res.json(transactions);
     } else {
-      if (user == "self") {
+      if (user == "self" || user == user_id) {
         const indexSelfTransactionService = new IndexSelfTransactionsService();
 
         const transaction = await indexSelfTransactionService.execute(user_id);
