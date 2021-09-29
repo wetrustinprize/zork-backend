@@ -42,7 +42,7 @@ class TransactionController {
     if (!user) {
       const indexTransactionService = new IndexTransactionService();
 
-      const transactions = await indexTransactionService.execute();
+      const transactions = await indexTransactionService.execute(user_id);
 
       return res.json(transactions);
     } else {
