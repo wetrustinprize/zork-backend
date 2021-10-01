@@ -235,7 +235,7 @@ POST /transactions
 
 ```bash
 {
-  "email": "example2@zork.com",
+  "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
   "value": 10,
   "description": "The transaction description."
 }

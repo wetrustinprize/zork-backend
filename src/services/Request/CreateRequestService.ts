@@ -6,7 +6,7 @@ import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface IRequestRequest {
   self: string;
-  email: string;
+  to_id: string;
   description?: string;
   value: number;
 }
@@ -14,7 +14,7 @@ interface IRequestRequest {
 class CreateRequestService {
   async execute({
     self: from,
-    email,
+    to_id,
     description = "",
     value,
   }: IRequestRequest) {
@@ -22,7 +22,7 @@ class CreateRequestService {
     const usersRepositories = getCustomRepository(UsersRepositories);
 
     // Check if "to" User exists
-    const toUser = await usersRepositories.findOne({ email });
+    const toUser = await usersRepositories.findOne(to_id);
     if (!toUser) {
       throw new BadRequestError("Invalid user");
     }

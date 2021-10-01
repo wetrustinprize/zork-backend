@@ -5,7 +5,7 @@ import { UsersRepositories } from "../../repositories/UsersRepositories";
 import { BadRequestError } from "../../utilities/HTTPErrors";
 
 interface ITransactionRequest {
-  email: string;
+  to_id: string;
   value: number;
   from: string;
   description?: string;
@@ -14,7 +14,7 @@ interface ITransactionRequest {
 
 class CreateTransactionService {
   async execute({
-    email,
+    to_id,
     value,
     from,
     description = "",
@@ -26,7 +26,7 @@ class CreateTransactionService {
     );
 
     // Check if "to" User exists
-    const toUser = await usersRepostiories.findOne({ email });
+    const toUser = await usersRepostiories.findOne(to_id);
     if (!toUser) {
       throw new BadRequestError("There is no user with this email");
     }

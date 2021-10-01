@@ -7,12 +7,12 @@ import { IndexTransactionService } from "../services/Transaction/IndexTransactio
 
 class TransactionController {
   async store(req: Request, res: Response) {
-    const { email, value, description } = req.body;
+    const { to_id, value, description } = req.body;
     const { user_id } = req;
     const createTransactionService = new CreateTransactionService();
 
     const transaction = await createTransactionService.execute({
-      email,
+      to_id,
       value,
       from: user_id,
       description,
