@@ -41,7 +41,7 @@ class AcceptRequestService {
 
     const createTransactionService = new CreateTransactionService();
     const transaction = await createTransactionService.execute({
-      email: toUser.email,
+      to_id: toUser.id,
       value: request.zorks,
       from: selfUser.id,
       description: request.description,
