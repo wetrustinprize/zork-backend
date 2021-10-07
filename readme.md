@@ -34,7 +34,7 @@ First of all, you need to install packages using your favorite package manager, 
 yarn install
 ```
 
-Then, you can start the server by typing: (_the server will listen on port 3000_)
+Then, you can start the server by typing: (_the server will listen on port 3001_)
 
 ```bash
 yarn dev
