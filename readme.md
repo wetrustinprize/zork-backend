@@ -16,8 +16,7 @@
 - [Request](#request)
   - [List authenticated user requests](#list-authenticated-user-requests)
   - [Show specific request by ID](#show-specific-request-by-id)
-  - [Accept request](#accept-request)
-  - [Refuse request](#refuse-request)
+  - [Interact with the request (accept/refuse)](#interact-with-the-request-acceptrefuse)
   - [Make request](#make-request)
 - [Credits](#credits)
 
@@ -77,19 +76,7 @@ POST /user
 
 **Returns**
 
-The user created in json format.
-
-```json
-{
-  "id": "816cde7e-d9c7-4efd-b456-36c456a67b24",
-  "fullname": "Hello world",
-  "email": "hello@example.com",
-  "created_at": "2021-09-23T19:06:20.000Z",
-  "updated_at": "2021-09-23T19:06:20.000Z",
-  "first_name": "Hello",
-  "last_name": "world"
-}
-```
+The [user](#user) created.
 
 ## Authenticate
 
@@ -134,7 +121,7 @@ GET /users
 
 **Returns**
 
-A array with all the registered users in json format.
+A array with all the registered [users](#user).
 
 ---
 
@@ -170,7 +157,37 @@ A array with all the transactions in json format.
 
 ## Shows transactions with a specific User
 
+Show transactions related to the authenticated user and another user.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /transactions/with/:id
+```
+
+_replace :id with the [user](#user) id._
+
+**Returns**
+
+All [transactions](#transaction) related to the authenticated user.
+
 ## Shows transactions related to authenticated User
+
+Show transactions related to the authenticated user.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /transactions/with/self
+```
+
+**Returns**
+
+All [transactions](#transaction) related to the authenticated user.
 
 ## Show specific transaction by ID
 
@@ -188,36 +205,7 @@ _replace :id with the uuid of the transaction_
 
 **Returns**
 
-The transaction object.
-
-```json
-{
-  "id": "6355f6e2-7c55-4696-9262-a89aa945a6e8",
-  "zorks": 10,
-  "from_id": "795ae92a-38a0-499a-86c9-11016657f6d2",
-  "to_id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
-  "description": "The transaction description."
-  "public": true,
-  "created_at": "2021-07-09T23:19:14.000Z",
-  "from_user": {
-    "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
-    "fullname": "Zork Sender",
-    "email": "example1@zork.com",
-    "created_at": "2021-07-09T22:27:01.000Z",
-    "updated_at": "2021-08-23T14:21:18.000Z",
-    "first_name": "Zork",
-    "last_name": "Sender"
-  },
-  "to_user": {
-    "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
-    "fullname": "Zork Receiver",
-    "email": "example2@zork.com",
-    "created_at": "2021-07-09T22:27:18.000Z",
-    "updated_at": "2021-07-09T23:19:14.000Z",
-    "first_name": "Zork",
-    "last_name": "Receiver"
-  }
-```
+The [transaction](#transaction) object.
 
 ## Make transaction
 
@@ -243,36 +231,7 @@ POST /transactions
 
 **Returns**
 
-The transaction object.
-
-```json
-{
-  "id": "6355f6e2-7c55-4696-9262-a89aa945a6e8",
-  "zorks": 10,
-  "from_id": "795ae92a-38a0-499a-86c9-11016657f6d2",
-  "to_id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
-  "description": "The transaction description."
-  "public": true,
-  "created_at": "2021-07-09T23:19:14.000Z",
-  "from_user": {
-    "id": "795ae92a-38a0-499a-86c9-11016657f6d2",
-    "fullname": "Zork Sender",
-    "email": "example1@zork.com",
-    "created_at": "2021-07-09T22:27:01.000Z",
-    "updated_at": "2021-08-23T14:21:18.000Z",
-    "first_name": "Zork",
-    "last_name": "Sender"
-  },
-  "to_user": {
-    "id": "d73ec13f-bf32-4bc6-985d-66d174273d5a",
-    "fullname": "Zork Receiver",
-    "email": "example2@zork.com",
-    "created_at": "2021-07-09T22:27:18.000Z",
-    "updated_at": "2021-07-09T23:19:14.000Z",
-    "first_name": "Zork",
-    "last_name": "Receiver"
-  }
-```
+The [transaction](#transaction) object.
 
 ---
 
@@ -295,13 +254,91 @@ The transaction object.
 
 ## List authenticated user requests
 
+List all the requests related to the authenticated user
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /requests
+```
+
+**Returns**
+
+A list of [request](#request) objects.
+
 ## Show specific request by ID
 
-## Accept request
+Show a specific request.
 
-## Refuse request
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+GET /requests/:id
+```
+
+_replace :id with the uuid of the request_
+
+**Returns**
+
+The specified [request](#request).
+
+## Interact with the request (accept/refuse)
+
+Accepts or refuses a specified request.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+POST /requests/:id
+```
+
+_replace :id with the uuid of the request_
+
+**Body**
+
+```json
+{
+  "method": "accept"
+}
+```
+
+Method can be either `"accept"` or `"refuse"`.
+
+**Returns**
+
+The specified [request](#request) updated.
 
 ## Make request
+
+Sends a new request to a specified user.
+
+- **Requires authentication**
+
+**Endpoint**
+
+```bash
+POST /requests/
+```
+
+**Body**
+
+```json
+{
+  "email": "hello@example.com",
+  "value": 10,
+  "description": "Hello world"
+}
+```
+
+**Returns**
+
+The created [request](#request).
 
 ---
 
