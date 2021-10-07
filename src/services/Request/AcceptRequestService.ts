@@ -17,8 +17,6 @@ class AcceptRequestService {
     const selfUser = await usersRepositories.findOne({ id: self });
     const request = await requestsRepositories.findOne(id);
 
-    console.log(request);
-
     if (request.to_id !== self) {
       throw new ForbiddenError("This request isn't for you");
     }
