@@ -330,7 +330,7 @@ POST /requests/
 
 ```json
 {
-  "email": "hello@example.com",
+  "to_id": "jwt",
   "value": 10,
   "description": "Hello world"
 }
